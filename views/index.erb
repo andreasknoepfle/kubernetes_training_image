@@ -1,0 +1,32 @@
+<html>
+  <head>
+  <!-- Google Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+
+  <!-- CSS Reset -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+
+  <!-- Milligram CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+  </head>
+  <body>
+    <div class="container" style="margin-top: 20vh; text-align: center;">
+      <h1>
+        🐈
+        Welcome to the kubernetes training server
+      </h1>
+      <br>
+      <img width="400" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Kubernetes_logo.svg/1024px-Kubernetes_logo.svg.png">
+      <br>
+      <br>
+      <h2>Shutdown server</h2>
+      <a class="button" href="/shutdown">Shoutdown!</a>
+
+      <h2>Redis connection test:</h2>
+      <iframe src="/check-redis"></iframe>
+
+      <h2>Redis persistance test</h2>
+      <a class="button" href="/check-redis-persistance">Start!</a>
+    </div>
+  </body>
+</html>

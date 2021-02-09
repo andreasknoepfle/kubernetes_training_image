@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-training-deployment
+  labels:
+    app: k8s-training
+spec:
+   selector:
+     matchLabels:
+       app: k8s-training
+   template:
+     metadata:
+       labels:
+         app: k8s-training
+     spec:
+       containers:
+       - name: training
+         image: andreasknoepfle/kubernetes_training_image:latest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: k8s-training-service
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 4567
+  selector:
+    app: k8s-training
