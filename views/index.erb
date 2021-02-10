@@ -19,14 +19,26 @@
       <img width="400" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Kubernetes_logo.svg/1024px-Kubernetes_logo.svg.png">
       <br>
       <br>
-      <h2>Shutdown server</h2>
-      <a class="button" href="/shutdown">Shoutdown!</a>
+      <h2><b>Lesson 01:</b> Shutdown server</h2>
+      <a class="button" href="/shutdown">Shutdown!</a>
 
-      <h2>Redis connection test:</h2>
+      <h2><b>Lesson 02:</b> Environment variable value</h2>
+      FOO: <%= ENV.fetch('FOO', '-- not set --') %>
+      <% if ENV['FOO'] %>
+        <img src="https://media.giphy.com/media/O0oQygeklvnX2/giphy.gif">
+      <% end %>
+      <h2><b>Lesson 03:</b> Replicas</h2>
+      <a class="button" href="/shutdown?replicas=true">Shutdown!</a>
+
+      <h2><b>Lesson 04:</b> Status checks</h2>
+      Current <code>/status</code> response: <%= StatusCheck.instance.status %><br>
+      <a class="button" href="/status-fail">Set 400</a>
+
+      <h2><b>Lesson 05:</b> Redis deployment</h2>
       <iframe src="/check-redis"></iframe>
 
-      <h2>Redis persistance test</h2>
-      <a class="button" href="/check-redis-persistance">Start!</a>
+      <h2><b>Lesson 06:</b> Persistance</h2>
+      <a class="button" href="/check-redis-persistance">Start test!</a>
     </div>
   </body>
 </html>
