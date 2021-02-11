@@ -48,17 +48,30 @@ get '/shutdown' do
   end
 end
 
-get '/check-redis-persistance' do
+get '/redis-store' do
   begin
     redis = Redis.new(url: 'redis://redis:6379/0')
-    redis.set('test', 'Passed test!')
+    redis.set('stored', 'cat')
     redis.shutdown
-    sleep 10
-    redis = Redis.new(url: 'redis://redis:6379/0')
-    body redis.get('test', 'Failed test. Value not persisted!')
+    redirect '/'
   rescue StandardError => e
     logger.error e
-    'Failed! No connection to redis!'
+    'No connection to redis!'
+  end
+end
+
+get '/redis-fetch' do
+  begin
+    redis = Redis.new(url: 'redis://redis:6379/0')
+    stored = redis.get('stored')
+    if stored == 'cat'
+      body '🐈'
+    else
+      body '-- nothing stored --'
+    end
+  rescue StandardError => e
+    logger.error e
+    'No connection to redis!'
   end
 end
 
