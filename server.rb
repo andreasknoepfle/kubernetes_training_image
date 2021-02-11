@@ -54,6 +54,7 @@ get '/check-redis-persistance' do
     redis.set('test', 'Passed test!')
     redis.shutdown
     sleep 10
+    redis = Redis.new(url: 'redis://redis:6379/0')
     body redis.get('test', 'Failed test. Value not persisted!')
   rescue StandardError => e
     logger.error e
