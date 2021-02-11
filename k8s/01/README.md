@@ -8,7 +8,7 @@ and see if you can access the service.
 Check the external IP of the loadbalancer that was deployed with the app with `kubectl get service` 
 to find out how to connect to the service.
 
-Note: When you used minikube you might have to run `minikube tunnel` to connect to you loadbalancer. 
+Note: When you use minikube you have to run `minikube tunnel` to connect to you loadbalancer. 
 The service will then be reachable through http://localhost:4567/ .
 
 ## Kill a pod
