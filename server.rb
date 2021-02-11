@@ -48,7 +48,7 @@ end
 
 get '/check-redis-persistance' do
   begin
-    redis = Redis.new(host: 'redis')
+    redis = Redis.new(url: 'redis://redis:6379/0')
     redis.set('test', 'Passed test!')
     redis.shutdown
     sleep 10
