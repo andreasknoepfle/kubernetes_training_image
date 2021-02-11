@@ -7,6 +7,7 @@ sleep 5
 
 require 'sinatra'
 require 'singleton'
+require 'redis'
 
 puts 'Booting complete 🚀'
 
@@ -21,10 +22,11 @@ end
 
 get '/check-redis' do
   begin
-    redis = Redis.new(host: 'redis')
+    redis = Redis.new(url: 'redis://redis:6379/0')
     redis.set('test', 'Success!')
     redis.get('test')
-  rescue StandardError
+  rescue StandardError => e
+    logger.error e
     'No connection to redis!'
   end
 end
@@ -53,7 +55,8 @@ get '/check-redis-persistance' do
     redis.shutdown
     sleep 10
     body redis.get('test', 'Failed test. Value not persisted!')
-  rescue StandardError
+  rescue StandardError => e
+    logger.error e
     'Failed! No connection to redis!'
   end
 end
