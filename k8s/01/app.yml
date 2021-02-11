@@ -5,17 +5,17 @@ metadata:
   labels:
     app: k8s-training
 spec:
-   selector:
-     matchLabels:
-       app: k8s-training
-   template:
-     metadata:
-       labels:
-         app: k8s-training
-     spec:
-       containers:
-       - name: training
-         image: andreasknoepfle/kubernetes_training_image:latest
+  selector:
+    matchLabels:
+      app: k8s-training
+  template:
+    metadata:
+      labels:
+        app: k8s-training
+    spec:
+      containers:
+      - name: training
+        image: andreasknoepfle/kubernetes_training_image:latest
 ---
 apiVersion: v1
 kind: Service

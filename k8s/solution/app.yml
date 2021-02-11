@@ -1,0 +1,88 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-training-deployment
+  labels:
+    app: k8s-training
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: k8s-training
+  template:
+    metadata:
+      labels:
+        app: k8s-training
+    spec:
+      containers:
+      - name: training
+        image: andreasknoepfle/kubernetes_training_image:latest
+        env:
+        - name: FOO
+          value: "Surprise cat"
+        livenessProbe:
+          httpGet:
+            path: /status
+            port: 4567
+          initialDelaySeconds: 6
+          periodSeconds: 5
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: k8s-training-service
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 4567
+  selector:
+    app: k8s-training
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+spec:
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redis
+        image: redis
+        args: ["--appendonly", "yes"]
+        volumeMounts:
+        - name: redis-volume
+          mountPath: /data
+      volumes:
+        - name: redis-volume
+          persistentVolumeClaim:
+            claimName: redis-storage
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+spec:
+  type: ClusterIP
+  ports:
+    - port: 6379
+  selector:
+    app: redis
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: redis-storage
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
