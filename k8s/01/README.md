@@ -9,7 +9,7 @@ Check the external IP of the loadbalancer that was deployed with the app with `k
 to find out how to connect to the service.
 
 Note: When you use minikube you have to run `minikube tunnel` to connect to you loadbalancer. 
-The service will then be reachable through http://localhost:4567/ .
+The service will then be reachable through `http://<external_ip>:4567/`.
 
 ## Kill a pod
 
